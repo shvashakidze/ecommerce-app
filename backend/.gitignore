@@ -1,0 +1,23 @@
+# Build outputs
+bin/
+obj/
+
+# User settings
+*.user
+*.suo
+.vs/
+
+# Environment & secrets
+appsettings.Development.json
+appsettings.Production.json
+appsettings.json
+
+# EF Core migrations 
+# **/Migrations/
+
+# Docker volumes
+postgres_data/
+
+# OS
+.DS_Store
+Thumbs.db

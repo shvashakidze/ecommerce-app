@@ -1,0 +1,53 @@
+<div class="max-w-3xl mx-auto">
+  <h1 class="text-2xl font-bold text-gray-800 mb-6">ჩემი შეკვეთები</h1>
+
+  @if (loading()) {
+    <div class="flex justify-center py-20">
+      <div class="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+    </div>
+  } @else if (orders().length === 0) {
+    <div class="text-center py-20 text-gray-400">
+      <p class="text-6xl mb-4">📦</p>
+      <p class="text-xl mb-4">შეკვეთები არ გაქვს</p>
+      <a routerLink="/products"
+         class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+        პროდუქტების ნახვა
+      </a>
+    </div>
+  } @else {
+    <div class="space-y-4">
+      @for (order of orders(); track order.id) {
+        <div class="bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
+          <div class="flex items-center justify-between mb-4">
+            <div>
+              <p class="text-xs text-gray-400 font-mono">{{ order.id }}</p>
+              <p class="text-sm text-gray-500">{{ order.createdAt | date:'dd MMM yyyy, HH:mm' }}</p>
+            </div>
+            <span class="px-3 py-1 rounded-full text-sm font-medium"
+                  [ngClass]="getStatusClass(order.status)">
+              {{ getStatusLabel(order.status) }}
+            </span>
+          </div>
+
+          <div class="border-t border-gray-50 pt-4 mb-4 space-y-2">
+            @for (item of order.items; track item.productId) {
+              <div class="flex justify-between text-sm">
+                <span class="text-gray-700">{{ item.productName }} × {{ item.quantity }}</span>
+                <span class="text-gray-800 font-medium">
+                  {{ item.unitPrice * item.quantity | number:'1.2-2' }}₾
+                </span>
+              </div>
+            }
+          </div>
+
+          <div class="flex justify-between items-center border-t border-gray-100 pt-4">
+            <span class="text-gray-500 text-sm">📍 {{ order.shippingAddress }}</span>
+            <span class="text-lg font-bold text-blue-600">
+              სულ: {{ order.totalAmount | number:'1.2-2' }}₾
+            </span>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

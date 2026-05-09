@@ -1,0 +1,53 @@
+<div class="min-h-screen bg-gray-50 flex items-center justify-center">
+  <div class="bg-white rounded-2xl shadow-lg p-8 w-full max-w-md text-center">
+
+    <!-- ბანკის ლოგო -->
+    @if (provider === 'tbc') {
+      <div class="bg-blue-600 text-white rounded-xl p-4 mb-6">
+        <h2 class="text-xl font-bold">💳 თიბისი ბანკი</h2>
+        <p class="text-sm opacity-80">TBC Checkout სიმულაცია (TEST MODE)</p>
+      </div>
+    } @else {
+      <div class="bg-orange-500 text-white rounded-xl p-4 mb-6">
+        <h2 class="text-xl font-bold">🏦 საქართველოს ბანკი</h2>
+        <p class="text-sm opacity-80">BOG Pay სიმულაცია (TEST MODE)</p>
+      </div>
+    }
+
+    <div class="bg-gray-50 rounded-xl p-4 mb-6 text-left">
+      <div class="flex justify-between mb-2">
+        <span class="text-gray-500 text-sm">შეკვეთის ID:</span>
+        <span class="font-mono text-xs text-gray-700">{{ orderId }}</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-gray-500 text-sm">გადასახდელი:</span>
+        <span class="font-bold text-lg text-gray-800">{{ amount }}₾</span>
+      </div>
+    </div>
+
+    <div class="bg-gray-100 rounded-xl p-4 mb-4">
+      <p class="text-sm text-gray-500 mb-2">ბარათის ნომერი</p>
+      <div class="bg-white border rounded-lg px-4 py-2 text-gray-400 text-sm">
+        4*** **** **** 1234
+      </div>
+    </div>
+
+    <p class="text-xs text-amber-600 bg-amber-50 rounded-lg p-2 mb-6">
+      ⚠️ სატესტო გვერდი — რეალური credentials-ის შემდეგ ბანკის გვერდი გამოჩნდება
+    </p>
+
+    <div class="flex gap-3">
+      <button (click)="pay(false)" [disabled]="loading"
+              class="flex-1 bg-red-500 text-white py-3 rounded-xl font-medium hover:bg-red-600 disabled:opacity-50">
+        ❌ გაუქმება
+      </button>
+      <button (click)="pay(true)" [disabled]="loading"
+              [class]="provider === 'tbc'
+                ? 'flex-1 bg-blue-600 text-white py-3 rounded-xl font-medium hover:bg-blue-700 disabled:opacity-50'
+                : 'flex-1 bg-orange-500 text-white py-3 rounded-xl font-medium hover:bg-orange-600 disabled:opacity-50'">
+        ✅ გადახდა
+      </button>
+    </div>
+
+  </div>
+</div>
