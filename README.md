@@ -19,7 +19,6 @@ Angular 21 + .NET 10 + PostgreSQL
 ### Backend
 cd backend
 cp appsettings.Example.json appsettings.json
-შეავსე appsettings.json შენი მონაცემებით
 
 docker compose up -d
 
